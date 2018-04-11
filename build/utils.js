@@ -3,9 +3,9 @@ var config = require('../config')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 exports.assetsPath = function (_path) {
-    var assetsSubDirectory = processComment.env.NODE_ENV === 'production'
+    var assetsSubDirectory = process.env.NODE_ENV === 'production'
         ? config.build.assetsSubDirectory
-        : config.devtools.assetsSubDirectory
+        : config.dev.assetsSubDirectory
     return path.posix.join(assetsSubDirectory, _path)
 }
 
@@ -59,7 +59,7 @@ exports.styleLoaders = function (options) {
         var loader = loaders[extension]
         output.push({
             test: new RegExp('\\.' + extension + '$'),
-            user: loader
+            use: loader
         })
     }
     return output
