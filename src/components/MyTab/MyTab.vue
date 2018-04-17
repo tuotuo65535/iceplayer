@@ -1,10 +1,18 @@
 <!-- Created by chenzy on 2018/4/12. -->
 <template>
     <div class="my-tab">
-        <span class="tab-link">推荐</span>
-        <span class="tab-link">歌手</span>
-        <span class="tab-link">排行</span>
-        <span class="tab-link">搜索</span>
+        <router-link tag="div" class="tab-item" :to="{name: 'recommend'}">
+            <span class="tab-link">推荐</span>
+        </router-link>
+        <router-link tag="div" class="tab-item" :to="{name: 'singer'}">
+            <span class="tab-link">歌手</span>
+        </router-link>
+        <router-link tag="div" class="tab-item" :to="{name: 'rank'}">
+            <span class="tab-link">排行</span>
+        </router-link>
+        <router-link tag="div" class="tab-item" :to="{name: 'search'}">
+            <span class="tab-link">搜索</span>
+        </router-link>
     </div>
 </template>
 
@@ -20,7 +28,7 @@
     line-height: 44px;
     font-size: $font-size-medium;
     .tab-item {
-        flex: 1px;
+        flex: 1;
         text-align: center;
         .tab-link {
             padding-bottom: 5px;
