@@ -39,7 +39,7 @@
         },
         data() {
             return {
-                // 标志位，歌曲已缓存号，可以播放了
+                // 标志位，歌曲已缓存好，可以播放了
                 songCanplay: false,
                 // 当前播放时间
                 currentTime: 0,
@@ -68,6 +68,15 @@
 
                 }
             }
+        },
+        filter: {
+            format: function (value) {
+                if (!value) return ''
+                return myTime.format(value)
+            }
+        },
+        methods: {
+
         }
     }
 </script>
