@@ -3,7 +3,7 @@
     <div class="my-header">
         <div class="icon"></div>
         <h1 class="text">Ice Player</h1>
-        <router-link class="mine" tag="div">
+        <router-link to="/user" class="mine" tag="div">
             <i class="icon-mine"></i>
         </router-link>
     </div>

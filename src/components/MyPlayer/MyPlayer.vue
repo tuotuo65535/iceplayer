@@ -4,12 +4,8 @@
     <div class="my-player">
         <!-- 正常的播放器 -->
         <transition name="normal"
-                    @enter="enter"
-                    @after-enter="afterEnter"
-                    @leave="leave"
-                    @after-leave="afterLeave"
         >
-            <div v-show="fullscreen" class="normal-player">
+            <div v-show="fullScreen" class="normal-player">
                 <!-- 背景图 -->
                 <div>
                     <img :src="currentSong.img" width="100%" height="100%"/>
@@ -18,7 +14,7 @@
                 <!-- 顶部 -->
                 <div class="top">
                     <!-- 顶部 -->
-                    <div @click="back" class="back">
+                    <div class="back">
                         <i class="icon-back"></i>
                     </div>
                     <div>
@@ -33,6 +29,7 @@
 </template>
 
 <script>
+    import { mapGetters, mapMutations, mapActions } from 'vuex'
     export default {
         components: {
 
@@ -76,7 +73,17 @@
             }
         },
         methods: {
-
+            ...mapMutations({
+                setfullScreen: 'SET_FULL_SCREEN',
+                setPlayingState: 'SET_PLAYING_STATE',
+                setCurrentIndex: 'SET_CURRENT_INDEX',
+                setMode: 'SET_MODE',
+                setPlayList: 'SET_PLAYLIST'
+            })
+        },
+        computed: {
+            ...mapGetters(['fullScreen', 'playlist', 'currentSong', 'playing',
+            'currentIndex', 'currentSong', 'mode', 'sequenceList', 'favoriteList']),
         }
     }
 </script>

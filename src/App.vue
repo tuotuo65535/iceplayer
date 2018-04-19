@@ -17,7 +17,8 @@
     export default {
         components: {
             MyHeader,
-            MyTab
+            MyTab,
+            MyPlayer
         }
     }
 </script>
