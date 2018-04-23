@@ -6,6 +6,13 @@
         <my-scroll ref="scroll" :data="lists" class="recommend-content">
             <div>
                 <div v-if="recommends.length" class="slider-wrapper">
+                    <my-slider>
+                        <div v-for="recommend in recommends">
+                            <a :href="recommend.linkUrl">
+                                <img @load :src="recommend.picUrl" class="needsclick">
+                            </a>
+                        </div>
+                    </my-slider>
                 </div>
 
                 <!-- 歌单推荐列表 -->
@@ -27,9 +34,11 @@
 <script>
     import { getRecommend, getList } from '@/api/recommend.js'
     import MyScroll from '@/components/base/MyScroll/MyScroll'
+    import MySlider from '@/components/base/MySlider/MySlider'
     export default {
         components: {
-            MyScroll
+            MyScroll,
+            MySlider
         },
         data () {
             return {
