@@ -38,6 +38,32 @@
                     probeType: this.probeType,
                     click: this.click
                 })
+
+                // 派发监听滚动位置事件
+                if (this.listenScroll) {
+                    let me = this
+                    this.scroll.on('scroll', (pos) => {
+                        // 向父组件传值
+                        me.$emit('scroll', pos)
+                    })
+                }
+
+                // 派发上拉刷新时间
+                if (this.pullup) {
+                    this.scroll.on('scrollEnd', () => {
+                        if (this.scroll.y <= (this.scroll.maxScrollY + 50)) {
+                            // 滑动到底部了
+                            this.$emit('scrollToEnd')
+                        }
+                    })
+                }
+
+                // 滚动前是否触发事件
+                if (this.beforeScroll) {
+                    this.scroll.on('beforeScrollStart', () => {
+                        this.$emit('beforeScroll')
+                    })
+                }
             }
         },
         created () {},
