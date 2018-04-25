@@ -26,7 +26,22 @@
             click: {
                 type: Boolean,
                 default: true
-            }
+            },
+            // 是否监听滚动位置
+            listenScroll: {
+                type: Boolean,
+                default: false
+            },
+            // 是否开启上拉刷新
+            pullup: {
+                type: Boolean,
+                default: false
+            },
+            // 滚动前是否触发事件，如：滚动前让输入框失去焦点，避免滚动搜索结果时移动端键盘遮挡
+            beforeScroll: {
+                type: Boolean,
+                default: false
+            },
         },
         methods: {
             _initScroll() {
