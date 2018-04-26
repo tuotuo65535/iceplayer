@@ -42,6 +42,11 @@
                 type: Boolean,
                 default: false
             },
+            // 延迟刷新
+            refreshDelay: {
+                type: Number,
+                default: 20
+            }
         },
         methods: {
             _initScroll() {
@@ -79,6 +84,21 @@
                         this.$emit('beforeScroll')
                     })
                 }
+            },
+            enable() {
+                this.scroll && this.scroll.enable()
+            },
+            disable() {
+                this.scroll && this.scroll.disable()
+            },
+            refresh() {
+                this.scroll && this.scroll.refresh()
+            },
+            scrollTo() {
+                this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments)
+            },
+            scrollToElement() {
+                this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
             }
         },
         created () {},

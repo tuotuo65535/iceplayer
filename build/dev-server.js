@@ -29,7 +29,7 @@ apiRoutes.get('/getList', function(req, res) {
         },
         params: req.query
     })
-    .then(function (reponse) {
+    .then(function (response) {
         res.json(response.data)
     })
     .catch(function (error) {
