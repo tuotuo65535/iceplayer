@@ -32,6 +32,10 @@
                     </ul>
                 </div>
             </div>
+            <!-- loading 组件 -->
+            <div v-show="!lists.length" class="loading-container">
+                <my-loading></my-loading>
+            </div>
         </my-scroll>
 
         <router-view></router-view>
@@ -42,10 +46,12 @@
     import { getRecommend, getList } from '@/api/recommend.js'
     import MyScroll from '@/components/base/MyScroll/MyScroll'
     import MySlider from '@/components/base/MySlider/MySlider'
+    import MyLoading from '@/components/base/MyLoading/MyLoading'
     export default {
         components: {
             MyScroll,
-            MySlider
+            MySlider,
+            MyLoading
         },
         data () {
             return {
@@ -71,7 +77,6 @@
             _getList() {
                 getList().then(res => {
                     if (res.code === 0) {
-                        console.log(res.data.list);
                         this.lists= res.data.list
                     }
                 })
@@ -131,6 +136,12 @@
                             color: $color-text-d;
                         }
                     }
+                }
+                .loading-container {
+                    position: absolute;
+                    width: 100%;
+                    top: 50%;
+                    transform: translateY(-50%);
                 }
             }
         }
