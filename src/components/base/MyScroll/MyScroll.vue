@@ -48,6 +48,13 @@
                 default: 20
             }
         },
+        watch: {
+            data () {
+                setTimeout(() => {
+                    this.refresh()
+                }, this.refreshDelay)
+            }
+        },
         methods: {
             _initScroll() {
                 if (!this.$refs.wrapper) {
