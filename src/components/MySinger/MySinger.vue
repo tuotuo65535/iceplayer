@@ -8,6 +8,7 @@
 </template>
 
 <script>
+    import { getSingerList } from '@/api/singer.js'
     import MyPhoneList from '@/components/base/MyPhoneList/MyPhoneList'
     import {playlistMixin} from '@/common/js/mixin.js'
     export default {
@@ -28,10 +29,18 @@
                 let bottom = playlist.length > 0 ? '60px' : ''
                 this.$refs.singerRef.style.bottom = bottom
                 this.$refs.listRef.refresh()
+            },
+            _getSingerList() {
+                getSingerList().then(res => {
+                    console.log(res)
+                    if (res.code === 0 ){
+                        //this.singers = this._formatSingers(res.data.list)
+                    }
+                })
             }
         },
         created() {
-
+            this._getSingerList()
         },
         mounted() {},
         destroyed() {}
