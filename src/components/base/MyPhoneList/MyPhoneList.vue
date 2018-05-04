@@ -2,8 +2,11 @@
 <!-- 歌手列表 -->
 <template>
     <my-scroll ref="scrollRef"
-                :data="data"
-                class="my-phone-list">
+               :data="data"
+               :probeType="probeType"
+               :listen-scroll="listenScroll"
+               @scroll="scroll"
+               class="my-phone-list">
         <ul>
             <!-- 左侧歌手列表 -->
             <li ref="leftRef" v-for="group in data" class="list-group">
@@ -58,13 +61,57 @@
         },
         watch: {
             data() {
+                setTimeout(() => {
+                    this._caclHeight()
+                }, 20)
+            },
+            // 监听scrollY 落在leftListHeight的哪个区间，实现高亮联动
+            scrollY(newY) {
+                const leftListHeight = this.leftListHeight
 
+                // 当滚动到顶部，newY > 0
+                if (newY > 0) {
+                    this.currentIndex = 0
+                    return
+                }
+
+                console.log(leftListHeight)
+                // 在中间部分滚动
+                for (let i=0; i < leftListHeight.length -1; i++) {
+                    let height1 = leftListHeight[i]
+                    let height2 = leftListHeight[i+1]
+                    if (-newY >= height1 && -newY < height2) {
+                        this.currentIndex = i;
+                        this.diff = height2 + newY
+                        return
+                    }
+                }
+
+                // 当滚动到底部，且-newY大于最后一个元素的上限
+                this.currentIndex = leftListHeight.length - 2
             }
         },
         methods: {
             // 对父元素提供的刷新 better-scroll方法
             refresh() {
                 this.$refs.scrollRef.refresh
+            },
+            // 计算 leftListHeight的高度
+            _caclHeight() {
+                // 初始化
+                let height = 0;
+                this.leftListHeight = []
+                this.leftListHeight.push(height)
+
+                let list = this.$refs.leftRef
+                for (let i = 0; i < list.length; i++) {
+                    height += list[i].clientHeight
+                    this.leftListHeight.push(height)
+                }
+            },
+            scroll(pos) {
+                this.scrollY = pos.y
+                console.log(this.scrollY)
             }
         },
         computed: {
@@ -82,7 +129,9 @@
             }
         },
         created() {
-
+            this.listenScroll = true
+            this.leftListHeight = []
+            this.probeType = 3 // better-scroll 滚动组件 不截流
         },
         mounted() {},
         destroyed() {}
