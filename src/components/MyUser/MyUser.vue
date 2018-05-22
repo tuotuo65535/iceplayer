@@ -60,7 +60,7 @@
         },
         data() {
             return {
-                switches[
+                switches: [
                     {name: '我的收藏'},
                     {name: '最近播放'}
                 ],
@@ -70,7 +70,14 @@
         props: {},
         watch: {},
         methods: {
-            ...mapActions(['savefavoriteList', 'delfavoriteList', 'insertSong', 'randomPlay'])
+            ...mapActions(['savefavoriteList', 'delfavoriteList', 'insertSong', 'randomPlay']),
+            // 当有迷你播放器时，调整滚动底部距离
+            handlePlaylist(playlist) {
+                let bottom = playlist.length > 0? '60px': ''
+                this.$refs.listWrapper.style.bottom = bottom
+                this.$refs.favoriteRef && this.$refs.favoriteRef.refresh()
+                this.$refs.playlistRef && this.$refs.playListRef.refresh()
+            }
         },
         filters: {},
         // 若要实现更复杂的数据变换，你应该使用计算属性

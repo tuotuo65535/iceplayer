@@ -6,7 +6,7 @@
             <li v-for="(item, index) in songs" class="item">
                 <!-- 排行奖杯图片 -->
                 <div class="rank" v-show="rank">
-                    <span class="icon" >{{ getRankText(index) }}</span>
+                    <span class="icon" :class="getRankCls(index)">{{ getRankText(index) }}</span>
                 </div>
 
                 <div class="content">
@@ -27,7 +27,9 @@
         props: {
             songs: {
                 type: Array,
-                default: []
+                default: () => {
+                    return []
+                }
             },
             // 排行奖杯图片
             rank: {
